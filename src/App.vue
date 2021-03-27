@@ -73,20 +73,24 @@ export default {
   },
 
   mounted() {
-    Produto.listar().then(resposta => {
-      console.log(resposta.data)
-      this.produtos = resposta.data
-    })
+    this.listar()
   },
 
   methods: {
+    
+    listar(){
+      Produto.listar().then(resposta => {
+        this.produtos = resposta.data
+      })
+    },
+    
     salvar(){
-      
       Produto.salvar(this.produto).then(resposta => {
+        this.produto = {}
         alert('Salvo com sucesso!')
         this.produto = resposta
+        this.listar()
       })
-
     }
   }
 }
